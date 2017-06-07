@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+ansible --key-file=~/.ssh/google_compute_engine --inventory hosts.ini \
+    all -a 'bash -c "ls /etc/lsb-release; cat /etc/lsb-release"'
