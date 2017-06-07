@@ -2,5 +2,5 @@
 
 set -euo pipefail
 
-ansible --key-file=~/.ssh/google_compute_engine --inventory hosts.ini \
+ansible --inventory hosts.ini \
     all -a "echo hello"

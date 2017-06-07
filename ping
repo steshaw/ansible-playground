@@ -2,5 +2,5 @@
 
 set -euo pipefail
 
-ansible --key-file=~/.ssh/google_compute_engine --inventory hosts.ini \
-  all -m ping
+ansible --inventory hosts.ini \
+    all -m ping
