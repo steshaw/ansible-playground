@@ -2,5 +2,4 @@
 
 set -euo pipefail
 
-ansible --inventory hosts.ini \
-    all --become -a '/sbin/reboot' --forks=2
+ansible all --become -a '/sbin/reboot' --forks=2

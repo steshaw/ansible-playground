@@ -1,8 +1,17 @@
 #!/bin/bash
 
-ansible -i hosts.ini gcp --become -m apt -a 'name=git state=latest'
-ansible -i hosts.ini gcp -m file --become -a 'dest=/app state=directory owner=steshaw group=steshaw'
-ansible -i hosts.ini gcp -m \
-    git -a 'repo=https://github.com/steshaw/scotty-example.git dest=/app version=HEAD force=yes'
-ansible -i hosts.ini gcp -m shell -a 'echo "-- fooey" >>/app/Main.hs'
-ansible -i hosts.ini gcp -m shell -a 'echo ---; pwd; ls; echo ---; cd /app; ls; git status'
+ansible gcp --become -m apt -a 'name=git state=latest'
+ansible gcp -m --become file -a '
+  dest=/app
+  state=directory
+  owner=steshaw
+  group=steshaw
+'
+ansible gcp -m git -a '
+  repo=https://github.com/steshaw/scotty-example.git
+  dest=/app
+  version=HEAD
+  force=yes
+'
+ansible gcp -m shell -a 'echo "-- fooey" >>/app/Main.hs'
+ansible gcp -m shell -a 'echo ---; pwd; ls; echo ---; cd /app; ls; git status'

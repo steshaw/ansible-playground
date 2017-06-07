@@ -2,5 +2,7 @@
 
 set -euo pipefail
 
-ansible --inventory hosts.ini \
-    all -a 'bash -c "ls /etc/lsb-release; cat /etc/lsb-release"'
+ansible all -m shell -a '
+  ls /etc/lsb-release
+  cat /etc/lsb-release
+'

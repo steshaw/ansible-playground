@@ -5,14 +5,7 @@ set -euo pipefail
 f=/tmp/a/long/path/hosts
 d=$(dirname $f)
 
-ansible --inventory hosts.ini \
-    gcp -m shell -a 'echo "groups:"; groups; echo "id:"; id'
-
-ansible --inventory hosts.ini \
-    gcp -m file -a "dest=$d state=directory"
-
-ansible --inventory hosts.ini \
-    gcp -m copy -a "src=/etc/hosts dest=$f"
-
-ansible --inventory hosts.ini \
-    gcp -m file -a "dest=$f mode=0600"
+ansible gcp -m shell -a 'echo "groups:"; groups; echo "id:"; id'
+ansible gcp -m file -a "dest=$d state=directory"
+ansible gcp -m copy -a "src=/etc/hosts dest=$f"
+ansible gcp -m file -a "dest=$f mode=0600"

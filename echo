@@ -2,5 +2,4 @@
 
 set -euo pipefail
 
-ansible --inventory hosts.ini \
-    all -a "echo hello"
+ansible all -a "echo hello"

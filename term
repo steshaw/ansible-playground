@@ -4,8 +4,6 @@ set -euo pipefail
 
 TERM='wat?'
 
-ansible --inventory hosts.ini \
-    instance-1 -a 'echo $TERM'
+ansible instance-1 -a 'echo $TERM'
 
-ansible --inventory hosts.ini \
-    instance-1 -m shell -a 'echo $TERM'
+ansible instance-1 -m shell -a 'echo $TERM'
