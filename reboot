@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+ansible --inventory hosts.ini \
+    all --become -a '/sbin/reboot' --forks=2
