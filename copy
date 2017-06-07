@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+ansible --inventory hosts.ini \
+    gcp -m copy -a 'src=/etc/hosts dest=/tmp/hosts'
