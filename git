@@ -2,6 +2,7 @@
 
 set -euxo pipefail
 
+ansible gcp --become -m apt_repository -a 'repo=ppa:git-core/ppa'
 ansible gcp --become -m apt -a 'name=git state=latest'
 ansible gcp --become -m file -a '
   dest=/app
@@ -14,6 +15,13 @@ ansible gcp -m git -a '
   dest=/app
   version=HEAD
   force=yes
+'
+ansible gcp -m shell -a '
+  executable=/bin/bash
+  set -euxo pipefail
+  git --version
+  cd /app
+  echo "epoch of stack.yaml = $(git log -1 --pretty=tformat:%ad --date=unix stack.yaml)"
 '
 ansible gcp -m shell -a 'echo "-- fooey" >>/app/Main.hs'
 ansible gcp -m shell -a '
