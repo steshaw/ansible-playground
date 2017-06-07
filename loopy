@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -euo pipefail
+
+declare -a hosts
+hosts=(
+  35.184.39.67
+  104.154.130.157
+)
+
+for host in "${hosts[@]}"; do
+  echo $host
+  ssh $host ls -R /tmp
+  echo
+done
