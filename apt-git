@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ansible -i hosts.ini gcp --become -m apt -a 'name=git state=present'
+ansible -i hosts.ini gcp -m shell -a 'git --version'
+ansible -i hosts.ini gcp --become -m apt -a 'name=git state=latest'
+ansible -i hosts.ini gcp -m shell -a 'git --version'
+ansible -i hosts.ini gcp --become -m apt -a 'name=git state=absent'
+ansible -i hosts.ini gcp -m shell -a 'git --version || echo git not found'
