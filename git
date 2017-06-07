@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 ansible gcp --become -m apt -a 'name=git state=latest'
-ansible gcp -m --become file -a '
+ansible gcp --become -m file -a '
   dest=/app
   state=directory
   owner=steshaw
@@ -14,4 +16,12 @@ ansible gcp -m git -a '
   force=yes
 '
 ansible gcp -m shell -a 'echo "-- fooey" >>/app/Main.hs'
-ansible gcp -m shell -a 'echo ---; pwd; ls; echo ---; cd /app; ls; git status'
+ansible gcp -m shell -a '
+  echo ----------
+  pwd
+  ls
+  echo ----------
+  cd /app
+  ls
+  git status
+'
