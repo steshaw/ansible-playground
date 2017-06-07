@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+ansible -i hosts.ini gcp --become -m apt -a 'name=nginx state=latest update_cache=yes'
+ansible -i hosts.ini gcp -m service -a 'name=nginx state=started'
